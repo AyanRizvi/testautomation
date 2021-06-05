@@ -19,8 +19,9 @@ PASSWORD = "aliraqqu"
 
 class InstaFollower:
 
-    def __init__(self, path):
-        self.driver = webdriver.Chrome(executable_path=path)
+    def __init__(self):
+        self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
 
     def login(self):
         self.driver.get("https://www.instagram.com/accounts/login/")
@@ -64,7 +65,7 @@ class InstaFollower:
                 cancel_button.click()
 
 
-bot = InstaFollower(chrome_web_driver_path)
+bot = InstaFollower()
 bot.login()
 bot.find_followers()
 bot.follow()
