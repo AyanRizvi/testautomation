@@ -2,26 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import ElementClickInterceptedException
 import time
-import os
-
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-chrome_web_driver_path = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
+chrome_web_driver_path = "C:\Development\chromedriver.exe"
 SIMILAR_ACCOUNT = "burakozcivit"
 USERNAME = "9889602245"
 PASSWORD = "aliraqqu"
-
+driver_path = webdriver.Chrome(executable_path=chrome_web_driver_path)
 
 class InstaFollower:
 
-    def __init__(self):
-        self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
+    def __init__(self, path):
+        self.driver = path
 
     def login(self):
         self.driver.get("https://www.instagram.com/accounts/login/")
@@ -65,7 +57,7 @@ class InstaFollower:
                 cancel_button.click()
 
 
-bot = InstaFollower()
+bot = InstaFollower(driver_path)
 bot.login()
 bot.find_followers()
 bot.follow()
